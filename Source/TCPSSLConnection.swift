@@ -60,7 +60,7 @@ public struct TCPSSLConnection: Connection {
         try stream.flush(timingOut: deadline)
     }
 
-    public func close() -> Bool {
-        return stream.close()
+    public func close() throws {
+        try stream.close()
     }
 }
