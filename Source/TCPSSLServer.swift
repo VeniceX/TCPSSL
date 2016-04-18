@@ -30,7 +30,7 @@ public struct TCPSSLServer: Host {
     public let context: SSLServerContext
 
     public init(at host: String = "0.0.0.0", on port: Int, queuing backlog: Int = 128, reusingPort reusePort: Bool = false, certificate: String, privateKey: String, certificateChain: String? = nil) throws {
-        self.server = try TCPServer(at: host, on: port, queuing: backlog, reusingPort: reusePort)
+        self.server = try TCPServer(host: host, port: port, backlog: backlog, reusePort: reusePort)
         self.context = try SSLServerContext(
             certificate: certificate,
             privateKey: privateKey,
