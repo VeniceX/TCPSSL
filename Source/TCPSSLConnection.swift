@@ -29,7 +29,7 @@ public struct TCPSSLConnection: Connection {
     public let connection: TCPConnection
     public let stream: SSLClientStream
 
-    public init(to host: String, on port: Int, verifyBundle: String? = nil, certificate: String? = nil, privateKey: String? = nil, certificateChain: String? = nil) throws {
+    public init(host: String, port: Int, verifyBundle: String? = nil, certificate: String? = nil, privateKey: String? = nil, certificateChain: String? = nil) throws {
         self.connection = try TCPConnection(host: host, port: port)
         let context = try SSLClientContext(
             verifyBundle: verifyBundle,
