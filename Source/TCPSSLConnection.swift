@@ -29,13 +29,20 @@ public struct TCPSSLConnection: Connection {
     public let connection: TCPConnection
     public let stream: SSLClientStream
 
-    public init(host: String, port: Int, verifyBundle: String? = nil, certificate: String? = nil, privateKey: String? = nil, certificateChain: String? = nil, SNIHostname: String? = nil) throws {
+    public init(host: String, port: Int,
+              verifyBundle: String? = nil,
+              certificate: String? = nil,
+              privateKey: String? = nil,
+              certificateChain: String? = nil,
+              SNIHostname: String? = nil,
+              cipherList: String? = nil) throws {
         self.connection = try TCPConnection(host: host, port: port)
         let context = try SSLClientContext(
             verifyBundle: verifyBundle,
             certificate: certificate,
             privateKey: privateKey,
-            certificateChain: certificateChain
+            certificateChain: certificateChain,
+            cipherList: cipherList
         )
         self.stream = try SSLClientStream(context: context, rawStream: connection, SNIHostname: SNIHostname)
     }
