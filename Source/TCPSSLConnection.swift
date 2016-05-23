@@ -29,8 +29,8 @@ public struct TCPSSLConnection: Connection {
     public let connection: TCPConnection
     public let stream: SSLClientStream
 
-    public init(host: String, port: Int, verifyBundle: String? = nil, certificate: String? = nil, privateKey: String? = nil, certificateChain: String? = nil, SNIHostname: String? = nil) throws {
-        self.connection = try TCPConnection(host: host, port: port)
+    public init(host: String, port: Int, verifyBundle: String? = nil, certificate: String? = nil, privateKey: String? = nil, certificateChain: String? = nil, SNIHostname: String? = nil, timingOut deadline: Double = .never) throws {
+        self.connection = try TCPConnection(host: host, port: port, timingOut: deadline)
         let context = try SSLClientContext(
             verifyBundle: verifyBundle,
             certificate: certificate,
