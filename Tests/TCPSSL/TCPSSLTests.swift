@@ -8,7 +8,7 @@ class TCPSSLTests: XCTestCase {
 }
 
 extension TCPSSLTests {
-    static var allTests : [(String, TCPSSLTests -> () throws -> Void)] {
+    static var allTests : [(String, (TCPSSLTests) -> () throws -> Void)] {
         return [
            ("testReality", testReality),
         ]
