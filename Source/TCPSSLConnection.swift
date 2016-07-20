@@ -27,17 +27,18 @@
 
 public struct TCPSSLConnection: Connection {
     public let connection: TCPConnection
-    public let stream: SSLClientStream
+    public let stream: SSLConnection
 
     public init(host: String, port: Int, verifyBundle: String? = nil, certificate: String? = nil, privateKey: String? = nil, certificateChain: String? = nil, SNIHostname: String? = nil, timingOut deadline: Double = .never) throws {
         self.connection = try TCPConnection(host: host, port: port, timingOut: deadline)
-        let context = try SSLClientContext(
+        let context = try Context(
             verifyBundle: verifyBundle,
             certificate: certificate,
             privateKey: privateKey,
-            certificateChain: certificateChain
+            certificateChain: certificateChain,
+            SNIHostname: SNIHostname
         )
-        self.stream = try SSLClientStream(context: context, rawStream: connection, SNIHostname: SNIHostname)
+        self.stream = try SSLConnection(context: context, rawStream: connection)
     }
 
     public func open(timingOut deadline: Double) throws {
